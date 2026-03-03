@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import blogService from "../services/blogService";
 import SkeletonCard from "./SkeletonCard";
+import { formatDate } from "../utils/helpers";
+
 export default function Posts() {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -26,7 +28,7 @@ export default function Posts() {
               <th>ID</th>
               <th>Title</th>
               <th>Author</th>
-              <th>Published At</th>
+              <th>Published</th>
               <th>Status</th>
               <th>Actions</th>
             </tr>
@@ -37,16 +39,21 @@ export default function Posts() {
                 <td>{post.id}</td>
                 <td>{post.title}</td>
                 <td>{post.authorId}</td>
-                <td>{post.createdAt}</td>
+                <td>{formatDate(post.createdAt)}</td>
                 <td>
                   {post.published ? (
                     <span className="badge success">Published</span>
                   ) : (
-                    <span className="badge danger">Draft</span>
+                    <span className="badge warning">Draft</span>
                   )}
                 </td>
                 <td>
                   <menu className="buttons">
+                    <li>
+                      <button className="small outline">
+                        {post.published ? "Remove" : "Publish"}
+                      </button>
+                    </li>
                     <li>
                       <button className="small outline">Edit</button>
                     </li>
