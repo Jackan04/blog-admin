@@ -19,19 +19,47 @@ export default function Posts() {
   }
   return (
     <>
-      <ul>
-        {posts.map((post) => (
-          <article className="card" key={post.id}>
-            <header>
-              <h3>{post.title}</h3>
-              <p>{post.createdAt}</p>
-            </header>
-            <footer className="flex gap-2 mt-4">
-              <button>Read More</button>
-            </footer>
-          </article>
-        ))}
-      </ul>
+      <div className="table">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Title</th>
+              <th>Author</th>
+              <th>Published At</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {posts.map((post) => (
+              <tr key={post.id}>
+                <td>{post.id}</td>
+                <td>{post.title}</td>
+                <td>{post.authorId}</td>
+                <td>{post.createdAt}</td>
+                <td>
+                  {post.published ? (
+                    <span className="badge success">Published</span>
+                  ) : (
+                    <span className="badge danger">Draft</span>
+                  )}
+                </td>
+                <td>
+                  <menu className="buttons">
+                    <li>
+                      <button className="small outline">Edit</button>
+                    </li>
+                    <li>
+                      <button className="small outline">Delete</button>
+                    </li>
+                  </menu>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </>
   );
 }
