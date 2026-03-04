@@ -1,6 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import DashBoard from "./pages/DashBoard";
 import Sidebar from "./components/Sidebar";
+import SigninPage from "./pages/auth/signin";
 
 function App() {
   return (
@@ -16,7 +17,7 @@ function App() {
               element={<h2>Post comments</h2>}
             />
             <Route path="/posts/create" element={<h2>Create post</h2>} />
-            <Route path="/auth/login" element={<h2>Sign in</h2>} />
+            <Route path="/auth/login" element={<SigninPage />} />
             <Route path="/auth/signup" element={<h2>Sign up</h2>} />
           </Routes>
         </div>

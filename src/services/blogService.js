@@ -1,22 +1,51 @@
-class BlogService {
+export default class BlogService {
   constructor() {
-    this.options = {
-      method: "GET",
+    this.baseUrl = "http://localhost:3000/api";
+  }
+
+  // Private helper to handle all fetch logic
+  async #request(endpoint, method = "GET", body = null) {
+    const url = `${this.baseUrl}${endpoint}`;
+
+    const options = {
+      method,
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzcyNTY4MjM3LCJleHAiOjE3NzI2NTQ2Mzd9.I5CRLhfzZba6lSy6HND1KCMcq0h2fXXs84cGHq71Rb0`,
+        Authorization: localStorage.getItem("jwt") || "",
       },
     };
+
+    if (body && ["POST", "PUT", "PATCH"].includes(method)) {
+      options.body = JSON.stringify(body);
+    }
+
+    const response = await fetch(url, options);
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      const error = new Error(data.message);
+      error.statusCode = data.statusCode || response.status;
+      error.validationErrors = data.validationErrors || [];
+      throw error; 
+    }
+
+    return data;
   }
 
   async getAllPosts() {
-    const result = await fetch(
-      "http://localhost:3000/api/admin/posts",
-      this.options,
-    );
+    return this.#request("/admin/posts");
+  }
 
-    return await result.json();
+  async login(credentials) {
+    const data = await this.#request("/auth/login", "POST", credentials);
+    if (data.token) {
+      localStorage.setItem("jwt", data.token);
+    }
+    return data;
+  }
+
+  logout() {
+    localStorage.removeItem("jwt");
   }
 }
-
-export default new BlogService();

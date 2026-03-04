@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import blogService from "../services/blogService";
+import BlogService from "../services/blogService";
 import SkeletonCard from "./SkeletonCard";
 import { formatDate } from "../utils/helpers";
 
@@ -9,8 +9,9 @@ export default function Posts() {
 
   useEffect(() => {
     (async () => {
+      const service = new BlogService();
       setLoading(true);
-      const result = await blogService.getAllPosts();
+      const result = await service.getAllPosts();
       setPosts(result);
       setLoading(false);
     })();
