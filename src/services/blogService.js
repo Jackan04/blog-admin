@@ -6,12 +6,13 @@ export default class BlogService {
   // Private helper to handle all fetch logic
   async #request(endpoint, method = "GET", body = null) {
     const url = `${this.baseUrl}${endpoint}`;
+    const token = localStorage.getItem("jwt");
 
     const options = {
       method,
       headers: {
         "Content-Type": "application/json",
-        Authorization: localStorage.getItem("jwt") || "",
+        Authorization: token,
       },
     };
 
@@ -35,6 +36,10 @@ export default class BlogService {
 
   async getAllPosts() {
     return this.#request("/admin/posts");
+  }
+
+  async createPost(postData) {
+    return this.#request("/admin/posts", "POST", postData);
   }
 
   async login(credentials) {

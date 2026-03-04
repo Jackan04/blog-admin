@@ -22,7 +22,7 @@ export default function SigninForm() {
     setApiError(null);
     setValidationErrors(null);
 
-    const service = new BlogService("POST", {
+    const service = new BlogService({
       username: username,
       password: password,
     });
@@ -46,10 +46,9 @@ export default function SigninForm() {
           ))}
         </ul>
       )}
-      <label htmlFor="username">
+      <label data-field htmlFor="username">
         Username
         <input
-          data-field
           type="text"
           id="username"
           name="username"
@@ -58,10 +57,9 @@ export default function SigninForm() {
           required
         />
       </label>
-      <label htmlFor="password">
+      <label data-field htmlFor="password">
         Password
         <input
-          data-field
           type="password"
           id="password"
           name="password"
