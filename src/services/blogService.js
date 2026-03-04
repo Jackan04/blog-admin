@@ -15,7 +15,7 @@ export default class BlogService {
       },
     };
 
-    if (body && ["POST", "PUT", "PATCH"].includes(method)) {
+    if (body && ["POST", "PUT"].includes(method)) {
       options.body = JSON.stringify(body);
     }
 
@@ -27,7 +27,7 @@ export default class BlogService {
       const error = new Error(data.message);
       error.statusCode = data.statusCode || response.status;
       error.validationErrors = data.validationErrors || [];
-      throw error; 
+      throw error;
     }
 
     return data;

@@ -1,6 +1,18 @@
-import { NavLink, Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import BlogService from "../services/blogService";
+import { useAuth } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 export default function Sidebar() {
+  const { signedIn } = useAuth();
+  const service = new BlogService();
+  const navigate = useNavigate();
+
+  function handleLogout() {
+    service.logout();
+    navigate("/auth/login");
+  }
+
   return (
     <aside data-sidebar>
       <header>
@@ -17,13 +29,21 @@ export default function Sidebar() {
               Dashboard
             </NavLink>
           </li>
+          {!signedIn && <NavLink to="/auth/login">Sign In</NavLink>}
         </ul>
       </nav>
 
       <footer>
-        <button className="outline sm" style={{ width: "100%" }} type="button">
-          Logout
-        </button>
+        {signedIn && (
+          <button
+            onClick={handleLogout}
+            className="outline sm"
+            style={{ width: "100%" }}
+            type="button"
+          >
+            Logout
+          </button>
+        )}
       </footer>
     </aside>
   );
