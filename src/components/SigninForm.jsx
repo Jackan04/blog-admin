@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import BlogService from "../../services/blogService";
+import BlogService from "../services/blogService";
 
 export default function SigninForm() {
   const [username, setUsername] = useState("");

@@ -46,6 +46,18 @@ export default class BlogService {
     return this.#request("/admin/posts", "POST", postData);
   }
 
+  async deletePostById(id) {
+    return this.#request(`/admin/posts/${id}`, "DELETE");
+  }
+
+  async updatePostById(id, postData) {
+    return this.#request(`/admin/posts/${id}`, "PUT", postData);
+  }
+
+  async getPostComments(postId) {
+    return this.#request(`/admin/posts/${postId}/comments`);
+  }
+
   async login(credentials) {
     const data = await this.#request("/auth/login", "POST", credentials);
     if (data.token) {

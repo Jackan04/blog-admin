@@ -1,15 +1,39 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Editor } from "@tinymce/tinymce-react";
 import BlogService from "../services/blogService";
+import { useParams } from "react-router-dom";
+import SkeletonCard from "./SkeletonCard";
 
-export default function PostForm() {
+export default function UpdatePostForm() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [published, setPublished] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [validationErrors, setValidationErrors] = useState(null);
   const [apiError, setApiError] = useState(null);
   const navigate = useNavigate();
+  const { id } = useParams();
+
+  useEffect(() => {
+    async function loadPost() {
+      const service = new BlogService();
+      setLoading(true);
+
+      try {
+        const post = await service.getPostById(id);
+        setTitle(post?.title ?? "");
+        setContent(post?.content ?? "");
+        setPublished(post?.published ?? false);
+      } catch (error) {
+        setApiError(error.message);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    loadPost();
+  }, [id]);
 
   function handleTitleChange(event) {
     setTitle(event.target.value);
@@ -22,20 +46,24 @@ export default function PostForm() {
   function handlePublishedChange(event) {
     setPublished(event.target.checked);
   }
+
   async function handleSubmit(event) {
     const service = new BlogService();
     event.preventDefault();
-    setApiError(null);
-    setValidationErrors(null);
 
     try {
-      await service.createPost({ title, content, published });
+      await service.updatePostById(id, { title, content, published });
       navigate("/");
     } catch (error) {
       setApiError(error.message);
       setValidationErrors(error.validationErrors ?? null);
     }
   }
+
+  if (loading) {
+    return <SkeletonCard />;
+  }
+
   return (
     <form onSubmit={handleSubmit}>
       {apiError && <p>{apiError}</p>}

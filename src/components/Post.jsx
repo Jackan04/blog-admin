@@ -3,6 +3,7 @@ import BlogService from "../services/blogService";
 import SkeletonCard from "./SkeletonCard";
 import { useParams } from "react-router-dom";
 import { formatDate } from "../utils/helpers";
+import PostComments from "./PostComments";
 
 export default function Post() {
   const [post, setPost] = useState(null);
@@ -25,7 +26,7 @@ export default function Post() {
   }
 
   return (
-    <article>
+    <article className="vstack justify-between">
       <section>
         <header>
           <div>
@@ -38,9 +39,11 @@ export default function Post() {
             <span className="badge warning">Draft</span>
           )}
         </header>
-        <br></br>
+
         <div dangerouslySetInnerHTML={{ __html: post?.content ?? "" }} />
       </section>
+      <hr />
+      <PostComments post={post} />
     </article>
   );
 }

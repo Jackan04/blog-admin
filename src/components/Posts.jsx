@@ -4,19 +4,26 @@ import SkeletonCard from "./SkeletonCard";
 import { formatDate } from "../utils/helpers";
 import { Link } from "react-router-dom";
 
+const service = new BlogService();
+
 export default function Posts() {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    (async () => {
-      const service = new BlogService();
+    async function loadPosts() {
       setLoading(true);
       const result = await service.getAllPosts();
       setPosts(result);
       setLoading(false);
-    })();
+    }
+    loadPosts();
   }, []);
+
+  async function handleDeletePost(id) {
+    await service.deletePostById(id);
+    setPosts(posts.filter((post) => post.id !== id));
+  }
 
   if (loading) {
     return <SkeletonCard />;
@@ -54,15 +61,20 @@ export default function Posts() {
               <td>
                 <menu className="buttons">
                   <li>
-                    <button className="small outline">
-                      {post.published ? "Remove" : "Publish"}
+                    <Link
+                      className="button small outline"
+                      to={`/posts/update/${post.id}`}
+                    >
+                      Edit
+                    </Link>
+                  </li>
+                  <li>
+                    <button
+                      onClick={() => handleDeletePost(post.id)}
+                      className="small outline"
+                    >
+                      Delete
                     </button>
-                  </li>
-                  <li>
-                    <button className="small outline">Edit</button>
-                  </li>
-                  <li>
-                    <button className="small outline">Delete</button>
                   </li>
                 </menu>
               </td>
