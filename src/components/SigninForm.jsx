@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import BlogService from "../services/blogService";
+import { useAuth } from "../context/AuthContext";
 
 export default function SigninForm() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [validationErrors, setValidationErrors] = useState(null);
   const [apiError, setApiError] = useState(null);
+  const { login } = useAuth();
   const navigate = useNavigate();
 
   function handleUsernameChange(event) {
@@ -22,13 +23,8 @@ export default function SigninForm() {
     setApiError(null);
     setValidationErrors(null);
 
-    const service = new BlogService({
-      username: username,
-      password: password,
-    });
-
     try {
-      await service.login({ username, password });
+      await login({ username, password });
       navigate("/");
     } catch (error) {
       setApiError(error.message);

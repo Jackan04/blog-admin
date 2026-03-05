@@ -6,12 +6,10 @@ import CreatePostPage from "./pages/CreatePostPage";
 import UpdatePostPage from "./pages/UpdatePostPage";
 import PostDetailsPage from "./pages/PostDetailsPage";
 import ProtectedRoute from "./services/ProtectedRoute";
-import { useAuth } from "./context/AuthContext";
 
 function App() {
-  const { signedIn } = useAuth();
   return (
-    <div className="container" key={signedIn ? "authenticated" : "guest"}>
+    <div className="container">
       <Nav />
       <main className=" mt-6">
         <Routes>
@@ -23,10 +21,6 @@ function App() {
             <Route path="/posts/:id" element={<PostDetailsPage />} />
             <Route path="/posts/create" element={<CreatePostPage />} />
             <Route path="/posts/update/:id" element={<UpdatePostPage />} />
-            <Route
-              path="/posts/:postId/comments"
-              element={<h2>Post comments</h2>}
-            />
           </Route>
         </Routes>
       </main>

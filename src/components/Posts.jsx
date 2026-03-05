@@ -3,12 +3,15 @@ import BlogService from "../services/blogService";
 import SkeletonCard from "./SkeletonCard";
 import { formatDate } from "../utils/helpers";
 import { Link } from "react-router-dom";
+import ConfirmDialog from "./ConfirmDialog";
 
 const service = new BlogService();
 
 export default function Posts() {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedPost, setSelectedPost] = useState(null);
 
   useEffect(() => {
     async function loadPosts() {
@@ -22,7 +25,19 @@ export default function Posts() {
 
   async function handleDeletePost(id) {
     await service.deletePostById(id);
-    setPosts(posts.filter((post) => post.id !== id));
+    setPosts((currentPosts) => currentPosts.filter((post) => post.id !== id));
+    setIsOpen(false);
+    setSelectedPost(null);
+  }
+
+  function openDeleteDialog(post) {
+    setSelectedPost(post);
+    setIsOpen(true);
+  }
+
+  function closeDeleteDialog() {
+    setIsOpen(false);
+    setSelectedPost(null);
   }
 
   if (loading) {
@@ -70,7 +85,7 @@ export default function Posts() {
                   </li>
                   <li>
                     <button
-                      onClick={() => handleDeletePost(post.id)}
+                      onClick={() => openDeleteDialog(post)}
                       className="small outline"
                     >
                       Delete
@@ -82,6 +97,12 @@ export default function Posts() {
           ))}
         </tbody>
       </table>
+      <ConfirmDialog
+        open={isOpen}
+        postTitle={selectedPost?.title ?? ""}
+        onCancel={closeDeleteDialog}
+        onConfirm={() => handleDeletePost(selectedPost?.id)}
+      />
     </div>
   );
 }

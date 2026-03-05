@@ -1,15 +1,13 @@
 import { NavLink } from "react-router-dom";
-import BlogService from "../services/blogService";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
 export default function Nav() {
-  const { signedIn } = useAuth();
-  const service = new BlogService();
+  const { signedIn, logout } = useAuth();
   const navigate = useNavigate();
 
   function handleLogout() {
-    service.logout();
+    logout();
     navigate("/auth/login");
   }
 
@@ -45,9 +43,13 @@ export default function Nav() {
                 </menu>
               </>
             ) : (
-              <li>
-                <NavLink to="/auth/login">Sign In</NavLink>
-              </li>
+              <menu className="buttons">
+                <li>
+                  <NavLink className="button" to="/auth/login">
+                    Sign In
+                  </NavLink>
+                </li>
+              </menu>
             )}
           </ul>
         </nav>
