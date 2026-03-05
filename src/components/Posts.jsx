@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import BlogService from "../services/blogService";
 import SkeletonCard from "./SkeletonCard";
 import { formatDate } from "../utils/helpers";
+import { Link } from "react-router-dom";
 
 export default function Posts() {
   const [posts, setPosts] = useState([]);
@@ -18,7 +19,7 @@ export default function Posts() {
   }, []);
 
   if (loading) {
-    return <SkeletonCard></SkeletonCard>;
+    return <SkeletonCard />;
   }
   return (
     <div className="table">
@@ -37,7 +38,10 @@ export default function Posts() {
           {posts.map((post) => (
             <tr key={post.id}>
               <td>{post.id}</td>
-              <td>{post.title}</td>
+              <td>
+                {" "}
+                <Link to={`/posts/${post.id}`}>{post.title}</Link>
+              </td>
               <td>{post.authorId}</td>
               <td>{formatDate(post.createdAt)}</td>
               <td>

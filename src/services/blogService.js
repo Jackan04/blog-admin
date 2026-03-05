@@ -38,6 +38,10 @@ export default class BlogService {
     return this.#request("/admin/posts");
   }
 
+  async getPostById(id) {
+    return this.#request(`/admin/posts/${id}`);
+  }
+
   async createPost(postData) {
     return this.#request("/admin/posts", "POST", postData);
   }

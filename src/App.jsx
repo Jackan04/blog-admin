@@ -4,6 +4,7 @@ import Sidebar from "./components/Sidebar";
 import SigninPage from "./pages/auth/signin";
 import CreatePostPage from "./pages/CreatePostPage";
 import ProtectedRoute from "./services/ProtectedRoute";
+import Post from "./components/Post";
 import { useAuth } from "./context/authContext";
 
 function App() {
@@ -20,7 +21,7 @@ function App() {
             <Route element={<ProtectedRoute />}>
               <Route path="/" element={<DashBoard />} />
               <Route path="/posts/create" element={<CreatePostPage />} />
-              <Route path="/post/:id" element={<h2>Post details</h2>} />
+              <Route path="/posts/:id" element={<Post />} />
               <Route
                 path="/posts/:postId/comments"
                 element={<h2>Post comments</h2>}
