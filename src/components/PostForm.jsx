@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Editor } from "@tinymce/tinymce-react";
 import BlogService from "../services/blogService";
 
 export default function PostForm() {
@@ -14,8 +15,8 @@ export default function PostForm() {
     setTitle(event.target.value);
   }
 
-  function handleContentChange(event) {
-    setContent(event.target.value);
+  function handleEditorChange(value) {
+    setContent(value);
   }
 
   function handlePublishedChange(event) {
@@ -58,28 +59,35 @@ export default function PostForm() {
       </label>
       <label data-field htmlFor="content">
         Content
-        <input
-          type="text"
+        <Editor
+          apiKey="0h01p07xrvj9fg4fu5e30d5jxea1jbp9wv8rruz1d0687n70"
           id="content"
-          name="content"
           value={content}
-          onChange={handleContentChange}
-          required
+          onEditorChange={handleEditorChange}
+          init={{
+            menubar: false,
+            plugins: "lists link code",
+            toolbar:
+              "undo redo | blocks | bold italic | bullist numlist | link | code",
+            height: 300,
+          }}
         />
       </label>
-      <label data-field htmlFor="published">
-        <input
-          type="checkbox"
-          id="published"
-          name="published"
-          role="switch"
-          checked={published}
-          onChange={handlePublishedChange}
-        />
-        Publish
-      </label>
+      <div>
+        <label data-field htmlFor="published">
+          <input
+            type="checkbox"
+            id="published"
+            name="published"
+            role="switch"
+            checked={published}
+            onChange={handlePublishedChange}
+          />
+          Publish
+        </label>
+      </div>
 
-      <button type="submit">Create</button>
+      <button type="submit">Save</button>
     </form>
   );
 }

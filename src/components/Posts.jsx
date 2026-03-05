@@ -28,7 +28,7 @@ export default function Posts() {
             <th>ID</th>
             <th>Title</th>
             <th>Author</th>
-            <th>Published</th>
+            <th>Created At</th>
             <th>Status</th>
             <th>Actions</th>
           </tr>
