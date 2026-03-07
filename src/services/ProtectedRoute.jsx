@@ -12,7 +12,11 @@ export default function ProtectedRoute() {
           <p>Please sign in to continue</p>
         </header>
         <footer className="flex gap-2 mt-4">
-          <Link className="button outline" to="/auth/login">
+          <Link
+            className="button outline"
+            to="/auth/login"
+            title="Go to sign in"
+          >
             Sign In
           </Link>
         </footer>

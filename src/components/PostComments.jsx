@@ -63,15 +63,21 @@ export default function PostComments({ post }) {
       </header>
       <form onSubmit={handleSubmit}>
         <label data-field htmlFor="text">
-          <input
-            value={comment}
-            onChange={handleCommentChange}
-            type="text"
-            id="text"
-            name="text"
-          />
+          <div className="input-wrapper">
+            <input
+              value={comment}
+              onChange={handleCommentChange}
+              type="text"
+              id="text"
+              name="text"
+              placeholder="Join the conversation"
+              title="Write a comment"
+            />
+            <button type="submit" title="Post your comment">
+              Post
+            </button>
+          </div>
         </label>
-        <button type="submit">Post</button>
       </form>
       <br />
       {comments.length > 0 ? (
@@ -87,6 +93,7 @@ export default function PostComments({ post }) {
                   onClick={() => setIsOpen(comment.id)}
                   data-variant="danger"
                   className="outline small"
+                  title="Delete this comment"
                 >
                   Delete
                 </button>

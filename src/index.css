@@ -29,3 +29,9 @@
   max-width: 900px;
   margin: 2rem auto 2rem auto;
 }
+
+.input-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}

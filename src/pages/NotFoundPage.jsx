@@ -8,7 +8,7 @@ export default function NotFoundPage() {
         The page you're looking for doesn't exist, was moved, or never existed
         in the first place.
       </p>
-      <Link className="button outline" to="/">
+      <Link className="button outline" to="/" title="Return to the dashboard">
         Go home
       </Link>
     </>

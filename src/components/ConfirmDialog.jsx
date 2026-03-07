@@ -1,9 +1,4 @@
-export default function ConfirmDialog({
-  open,
-  itemName,
-  onCancel,
-  onConfirm,
-}) {
+export default function ConfirmDialog({ open, itemName, onCancel, onConfirm }) {
   return (
     <dialog open={open}>
       <header>
@@ -15,10 +10,15 @@ export default function ConfirmDialog({
         cannot be undone.
       </div>
       <footer>
-        <button className="outline" onClick={onCancel}>
+        <button className="outline" onClick={onCancel} title="Cancel">
           Cancel
         </button>
-        <button className="outline" data-variant="danger" onClick={onConfirm}>
+        <button
+          className="outline"
+          data-variant="danger"
+          onClick={onConfirm}
+          title="Confirm deletion"
+        >
           Delete
         </button>
       </footer>

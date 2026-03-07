@@ -61,7 +61,9 @@ export default function Posts() {
               <td>{post.id}</td>
               <td>
                 {" "}
-                <Link to={`/posts/${post.id}`}>{post.title}</Link>
+                <Link to={`/posts/${post.id}`} title="View post details">
+                  {post.title}
+                </Link>
               </td>
               <td>{post.authorId}</td>
               <td>{formatDate(post.createdAt)}</td>
@@ -78,6 +80,7 @@ export default function Posts() {
                     <Link
                       className="button small outline"
                       to={`/posts/update/${post.id}`}
+                      title="Edit this post"
                     >
                       Edit
                     </Link>
@@ -86,6 +89,7 @@ export default function Posts() {
                     <button
                       onClick={() => setIsOpen(post.id)}
                       className="small outline"
+                      title="Delete this post"
                     >
                       Delete
                     </button>

@@ -48,6 +48,8 @@ export default function SigninForm() {
           type="text"
           id="username"
           name="username"
+          placeholder="Enter your username"
+          title="Enter your username"
           value={username}
           onChange={handleUsernameChange}
           required
@@ -59,12 +61,16 @@ export default function SigninForm() {
           type="password"
           id="password"
           name="password"
+          placeholder="Enter your password"
+          title="Enter your password"
           value={password}
           onChange={handlePasswordChange}
           required
         />
       </label>
-      <button type="submit">Login</button>
+      <button type="submit" title="Sign in to your account">
+        Login
+      </button>
     </form>
   );
 }

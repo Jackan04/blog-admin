@@ -20,12 +20,21 @@ export default function Nav() {
             {signedIn ? (
               <menu className="buttons">
                 <li>
-                  <NavLink className="button outline" to="/" end>
+                  <NavLink
+                    className="button outline"
+                    to="/"
+                    end
+                    title="Go to dashboard"
+                  >
                     Dashboard
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink className="button outline" to="/posts/create">
+                  <NavLink
+                    className="button outline"
+                    to="/posts/create"
+                    title="Create a new post"
+                  >
                     New Post
                   </NavLink>
                 </li>
@@ -34,6 +43,7 @@ export default function Nav() {
                     onClick={handleLogout}
                     className="outline sm"
                     type="button"
+                    title="Sign out of your account"
                   >
                     Logout
                   </button>
@@ -42,7 +52,11 @@ export default function Nav() {
             ) : (
               <menu className="buttons">
                 <li>
-                  <NavLink className="button" to="/auth/login">
+                  <NavLink
+                    className="button"
+                    to="/auth/login"
+                    title="Go to sign in"
+                  >
                     Sign In
                   </NavLink>
                 </li>

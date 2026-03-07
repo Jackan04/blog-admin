@@ -52,6 +52,8 @@ export default function CreatePostForm() {
           type="text"
           id="title"
           name="title"
+          placeholder="Enter a post title"
+          title="Enter the post title"
           value={title}
           onChange={handleTitleChange}
           required
@@ -87,7 +89,9 @@ export default function CreatePostForm() {
         </label>
       </div>
 
-      <button type="submit">Save</button>
+      <button type="submit" title="Save your changes">
+        Save
+      </button>
     </form>
   );
 }

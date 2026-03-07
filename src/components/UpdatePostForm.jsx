@@ -79,6 +79,8 @@ export default function UpdatePostForm() {
           type="text"
           id="title"
           name="title"
+          placeholder="Update the post title"
+          title="Update the post title"
           value={title}
           onChange={handleTitleChange}
           required
@@ -114,7 +116,9 @@ export default function UpdatePostForm() {
         </label>
       </div>
 
-      <button type="submit">Save</button>
+      <button type="submit" title="Save your changes">
+        Save
+      </button>
     </form>
   );
 }
