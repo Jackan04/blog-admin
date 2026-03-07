@@ -86,7 +86,7 @@ export default function PostComments({ post }) {
                 <button
                   onClick={() => setIsOpen(true)}
                   data-variant="danger"
-                  className="outline"
+                  className="outline small"
                 >
                   Delete
                 </button>
