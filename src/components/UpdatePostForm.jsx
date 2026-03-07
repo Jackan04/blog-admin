@@ -22,9 +22,9 @@ export default function UpdatePostForm() {
 
       try {
         const post = await service.getPostById(id);
-        setTitle(post?.title ?? "");
-        setContent(post?.content ?? "");
-        setPublished(post?.published ?? false);
+        setTitle(post?.title);
+        setContent(post?.content);
+        setPublished(post?.published);
       } catch (error) {
         setApiError(error.message);
       } finally {

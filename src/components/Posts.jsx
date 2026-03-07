@@ -11,33 +11,40 @@ export default function Posts() {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedPost, setSelectedPost] = useState(null);
 
   useEffect(() => {
     async function loadPosts() {
       setLoading(true);
-      const result = await service.getAllPosts();
-      setPosts(result);
-      setLoading(false);
+
+      try {
+        const result = await service.getAllPosts();
+        setPosts(result);
+      } catch (error) {
+        console.error("Failed to load posts", error);
+      } finally {
+        setLoading(false);
+      }
     }
+
     loadPosts();
   }, []);
 
   async function handleDeletePost(id) {
-    await service.deletePostById(id);
-    setPosts((currentPosts) => currentPosts.filter((post) => post.id !== id));
-    setIsOpen(false);
-    setSelectedPost(null);
+    try {
+      await service.deletePostById(id);
+      setPosts((currentPosts) => currentPosts.filter((post) => post.id !== id));
+      setIsOpen(false);
+    } catch (error) {
+      console.error("Failed to delete post", error);
+    }
   }
 
-  function openDeleteDialog(post) {
-    setSelectedPost(post);
+  function openDeleteDialog() {
     setIsOpen(true);
   }
 
   function closeDeleteDialog() {
     setIsOpen(false);
-    setSelectedPost(null);
   }
 
   if (loading) {
@@ -90,6 +97,12 @@ export default function Posts() {
                     >
                       Delete
                     </button>
+                    <ConfirmDialog
+                      open={isOpen}
+                      itemName={post?.title}
+                      onCancel={closeDeleteDialog}
+                      onConfirm={() => handleDeletePost(post?.id)}
+                    />
                   </li>
                 </menu>
               </td>
@@ -97,12 +110,6 @@ export default function Posts() {
           ))}
         </tbody>
       </table>
-      <ConfirmDialog
-        open={isOpen}
-        postTitle={selectedPost?.title ?? ""}
-        onCancel={closeDeleteDialog}
-        onConfirm={() => handleDeletePost(selectedPost?.id)}
-      />
     </div>
   );
 }

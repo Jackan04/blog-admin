@@ -1,6 +1,6 @@
 export default function ConfirmDialog({
   open,
-  postTitle,
+  itemName,
   onCancel,
   onConfirm,
 }) {
@@ -11,7 +11,7 @@ export default function ConfirmDialog({
         <p>Are you sure you want to delete this post?</p>
       </header>
       <div>
-        <strong>"{postTitle}"</strong> will be permanently deleted. This action
+        <strong>"{itemName}"</strong> will be permanently deleted. This action
         cannot be undone.
       </div>
       <footer>

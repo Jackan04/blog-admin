@@ -54,8 +54,20 @@ export default class BlogService {
     return this.#request(`/admin/posts/${id}`, "PUT", postData);
   }
 
+  async getAuthorById(id) {
+    return this.#request(`/admin/authors/${id}`);
+  }
+
+  async createComment(postId, commentData) {
+    return this.#request(`/admin/posts/${postId}/comments`, "POST", commentData);
+  }
+
   async getPostComments(postId) {
     return this.#request(`/admin/posts/${postId}/comments`);
+  }
+
+  async deletePostCommentById(id) {
+    return this.#request(`/admin/comments/${id}`, "DELETE");
   }
 
   async login(credentials) {
