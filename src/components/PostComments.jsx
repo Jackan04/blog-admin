@@ -8,7 +8,7 @@ const service = new BlogService();
 export default function PostComments({ post }) {
   const [comments, setComments] = useState([]);
   const [comment, setComment] = useState("");
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(null);
 
   useEffect(() => {
     async function loadComments() {
@@ -31,7 +31,7 @@ export default function PostComments({ post }) {
       setComments((currentComments) =>
         currentComments.filter((comment) => comment.id !== id),
       );
-      setIsOpen(false);
+      setIsOpen(null);
     } catch (error) {
       console.error("Failed to delete comment", error);
     }
@@ -84,7 +84,7 @@ export default function PostComments({ post }) {
                   {formatDate(comment.createdAt)}
                 </small>
                 <button
-                  onClick={() => setIsOpen(true)}
+                  onClick={() => setIsOpen(comment.id)}
                   data-variant="danger"
                   className="outline small"
                 >
@@ -93,8 +93,8 @@ export default function PostComments({ post }) {
               </div>
               <ConfirmDialog
                 itemName="Comment"
-                open={isOpen}
-                onCancel={() => setIsOpen(false)}
+                open={isOpen === comment.id}
+                onCancel={() => setIsOpen(null)}
                 onConfirm={() => handleDeleteComment(comment.id)}
               />
             </article>

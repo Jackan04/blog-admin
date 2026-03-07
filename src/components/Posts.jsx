@@ -10,7 +10,7 @@ const service = new BlogService();
 export default function Posts() {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(null);
 
   useEffect(() => {
     async function loadPosts() {
@@ -33,18 +33,10 @@ export default function Posts() {
     try {
       await service.deletePostById(id);
       setPosts((currentPosts) => currentPosts.filter((post) => post.id !== id));
-      setIsOpen(false);
+      setIsOpen(null);
     } catch (error) {
       console.error("Failed to delete post", error);
     }
-  }
-
-  function openDeleteDialog() {
-    setIsOpen(true);
-  }
-
-  function closeDeleteDialog() {
-    setIsOpen(false);
   }
 
   if (loading) {
@@ -92,15 +84,15 @@ export default function Posts() {
                   </li>
                   <li>
                     <button
-                      onClick={openDeleteDialog}
+                      onClick={() => setIsOpen(post.id)}
                       className="small outline"
                     >
                       Delete
                     </button>
                     <ConfirmDialog
-                      open={isOpen}
+                      open={isOpen === post?.id}
                       itemName={post?.title}
-                      onCancel={closeDeleteDialog}
+                      onCancel={() => setIsOpen(null)}
                       onConfirm={() => handleDeletePost(post?.id)}
                     />
                   </li>
