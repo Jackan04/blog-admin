@@ -49,7 +49,7 @@ export default function Posts() {
           <tr>
             <th>ID</th>
             <th>Title</th>
-            <th>Author</th>
+            <th>Author ID</th>
             <th>Created At</th>
             <th>Status</th>
             <th>Actions</th>
