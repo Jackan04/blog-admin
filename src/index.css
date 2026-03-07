@@ -1,3 +1,30 @@
+:root {
+  color-scheme: light dark;
+  --background: light-dark(rgb(251 250 248), rgb(14 13 17));
+  --foreground: light-dark(rgb(19 17 22), rgb(237 235 232));
+  --card: light-dark(rgb(255 254 252), rgb(22 20 27));
+  --card-foreground: light-dark(rgb(19 17 22), rgb(237 235 232));
+  --primary: light-dark(rgb(109 70 235), rgb(139 101 255));
+  --primary-foreground: light-dark(rgb(255 255 255), rgb(255 255 255));
+  --secondary: light-dark(rgb(243 241 238), rgb(32 29 38));
+  --secondary-foreground: light-dark(rgb(19 17 22), rgb(237 235 232));
+  --muted: light-dark(rgb(243 241 238), rgb(32 29 38));
+  --muted-foreground: light-dark(rgb(120 114 128), rgb(148 143 158));
+  --faint: light-dark(rgb(249 248 246), rgb(18 16 22));
+  --faint-foreground: light-dark(rgb(188 184 194), rgb(80 75 90));
+  --accent: light-dark(rgb(237 232 255), rgb(44 34 72));
+  --accent-foreground: light-dark(rgb(109 70 235), rgb(172 142 255));
+  --danger: light-dark(rgb(225 60 70), rgb(255 80 90));
+  --danger-foreground: light-dark(rgb(255 255 255), rgb(255 255 255));
+  --success: light-dark(rgb(33 177 120), rgb(46 204 140));
+  --success-foreground: light-dark(rgb(255 255 255), rgb(255 255 255));
+  --warning: light-dark(rgb(234 138 0), rgb(255 162 31));
+  --warning-foreground: light-dark(rgb(255 255 255), rgb(19 17 22));
+  --border: light-dark(rgb(220 216 210), rgb(40 36 50));
+  --input: light-dark(rgb(220 216 210), rgb(40 36 50));
+  --ring: light-dark(rgb(109 70 235), rgb(139 101 255));
+}
+
 .container {
   max-width: 900px;
   margin: 2rem auto 2rem auto;
