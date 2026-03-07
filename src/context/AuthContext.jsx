@@ -20,7 +20,7 @@ export function AuthProvider({ children }) {
   }
 
   useEffect(() => {
-    const run = async () => {
+    const run = () => {
       const token = localStorage.getItem("jwt");
       setSignedIn(Boolean(token));
       setLoading(false);
@@ -36,4 +36,5 @@ export function AuthProvider({ children }) {
   );
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useAuth = () => useContext(AuthContext);

@@ -92,7 +92,7 @@ export default function Posts() {
                   </li>
                   <li>
                     <button
-                      onClick={() => openDeleteDialog(post)}
+                      onClick={openDeleteDialog}
                       className="small outline"
                     >
                       Delete

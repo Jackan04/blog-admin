@@ -1,6 +1,5 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
-import { useNavigate } from "react-router-dom";
 
 export default function Nav() {
   const { signedIn, logout } = useAuth();
@@ -19,29 +18,27 @@ export default function Nav() {
         <nav aria-label="Main navigation">
           <ul className="hstack gap-2">
             {signedIn ? (
-              <>
-                <menu className="buttons">
-                  <li>
-                    <NavLink className="button outline" to="/" end>
-                      Dashboard
-                    </NavLink>
-                  </li>
-                  <li>
-                    <NavLink className="button outline" to="/posts/create">
-                      New Post
-                    </NavLink>
-                  </li>
-                  <li>
-                    <button
-                      onClick={handleLogout}
-                      className="outline sm"
-                      type="button"
-                    >
-                      Logout
-                    </button>
-                  </li>
-                </menu>
-              </>
+              <menu className="buttons">
+                <li>
+                  <NavLink className="button outline" to="/" end>
+                    Dashboard
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink className="button outline" to="/posts/create">
+                    New Post
+                  </NavLink>
+                </li>
+                <li>
+                  <button
+                    onClick={handleLogout}
+                    className="outline sm"
+                    type="button"
+                  >
+                    Logout
+                  </button>
+                </li>
+              </menu>
             ) : (
               <menu className="buttons">
                 <li>

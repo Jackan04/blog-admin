@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import DashBoard from "./pages/DashBoard";
 import Nav from "./components/Nav";
-import SigninPage from "./pages/auth/signin";
+import SigninPage from "./pages/signin";
 import CreatePostPage from "./pages/CreatePostPage";
 import UpdatePostPage from "./pages/UpdatePostPage";
 import PostDetailsPage from "./pages/PostDetailsPage";
@@ -12,7 +12,7 @@ function App() {
   return (
     <div className="container">
       <Nav />
-      <main className=" mt-6">
+      <main className="mt-6">
         <Routes>
           <Route path="/auth/login" element={<SigninPage />} />
           <Route path="*" element={<NotFoundPage />} />

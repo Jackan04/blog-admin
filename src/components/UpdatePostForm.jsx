@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Editor } from "@tinymce/tinymce-react";
 import BlogService from "../services/blogService";
-import { useParams } from "react-router-dom";
 import SkeletonCard from "./SkeletonCard";
 
 export default function UpdatePostForm() {
