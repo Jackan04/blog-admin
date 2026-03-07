@@ -6,6 +6,7 @@ import CreatePostPage from "./pages/CreatePostPage";
 import UpdatePostPage from "./pages/UpdatePostPage";
 import PostDetailsPage from "./pages/PostDetailsPage";
 import ProtectedRoute from "./services/ProtectedRoute";
+import NotFoundPage from "./pages/NotFoundPage";
 
 function App() {
   return (
@@ -14,8 +15,7 @@ function App() {
       <main className=" mt-6">
         <Routes>
           <Route path="/auth/login" element={<SigninPage />} />
-          <Route path="/auth/signup" element={<h2>Sign up</h2>} />
-
+          <Route path="*" element={<NotFoundPage />} />
           <Route element={<ProtectedRoute />}>
             <Route path="/" element={<DashBoard />} />
             <Route path="/posts/:id" element={<PostDetailsPage />} />
