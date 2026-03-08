@@ -60,9 +60,7 @@ npm install
 
 ### API Setup
 
-API setup is documented in the Blog API repository:
-
-[https://github.com/Jackan04/blog-api](https://github.com/Jackan04/blog-api)
+API setup is documented in the [Blog API repository](https://github.com/Jackan04/blog-api?tab=readme-ov-file#:~:text=dotenv-,Getting%20Started%20/%20Setup,-Prerequisites):
 
 After your API is running, this client expects it at `http://localhost:3000/api` (configured in `src/services/blogService.js`).
 
