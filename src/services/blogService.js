@@ -7,13 +7,17 @@ export default class BlogService {
   async #request(endpoint, method = "GET", body = null) {
     const url = `${this.baseUrl}${endpoint}`;
     const token = localStorage.getItem("jwt");
+    const headers = {
+      "Content-Type": "application/json",
+    };
+
+    if (token) {
+      headers.Authorization = token;
+    }
 
     const options = {
       method,
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: token,
-      },
+      headers,
     };
 
     if (body && ["POST", "PUT"].includes(method)) {
